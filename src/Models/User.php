@@ -21,4 +21,23 @@ class User
             'hash_password' => $hash_password
         ]);
     }
+
+    public function userLogin($email, $password)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->execute([
+            'email' => $email,
+        ]);
+
+        $user = $stmt->fetch();
+        if (!$user) {
+            return false;
+        }
+
+        $confirmedPassword = password_verify($password, $user['hash_password']);
+        if (!$confirmedPassword) {
+            return false;
+        }
+        return true;
+    }
 }
