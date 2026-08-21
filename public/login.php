@@ -3,10 +3,12 @@ session_start();
 
 $pdo = require_once '../config/database.php';
 require_once '../src/Models/User.php';
-$email = 'test@gmail.com';
+
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 $user = new User($pdo);
-$confirmedUser = $user->userLogin($email, 'password');
+$confirmedUser = $user->userLogin($email, $password);
 
 if (!$confirmedUser) {
     echo "Prisijungimas nepavyko";
