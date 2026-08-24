@@ -13,13 +13,18 @@ class User
     {
         $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->pdo->prepare("INSERT INTO users(email,username,hash_password) VALUES (:email, :username, :hash_password)");
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO users(email,username,hash_password) VALUES (:email, :username, :hash_password)");
 
-        $stmt->execute([
-            'email' => $email,
-            'username' => $username,
-            'hash_password' => $hash_password
-        ]);
+            $stmt->execute([
+                'email' => $email,
+                'username' => $username,
+                'hash_password' => $hash_password
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function userLogin($email, $password)
@@ -39,5 +44,18 @@ class User
             return false;
         }
         return true;
+    }
+    // Patikrinam ar el pastas laisvas
+    public function isEmailTaken($email)
+    {
+        $stmt = $this->pdo->prepare("SELECT email FROM users WHERE email = :email");
+        $stmt->execute([
+            'email' => $email,
+        ]);
+        $enteredEmail = $stmt->fetch();
+        if ($enteredEmail) {
+            return true;
+        }
+        return false;
     }
 }
