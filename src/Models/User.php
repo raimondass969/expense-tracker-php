@@ -33,7 +33,7 @@ class User
         $stmt->execute([
             'email' => $email,
         ]);
-
+        // get connected user
         $user = $stmt->fetch();
         if (!$user) {
             return false;
@@ -43,9 +43,9 @@ class User
         if (!$confirmedPassword) {
             return false;
         }
-        return true;
+        return $user;
     }
-    // Patikrinam ar el pastas laisvas
+
     public function isEmailTaken($email)
     {
         $stmt = $this->pdo->prepare("SELECT email FROM users WHERE email = :email");
