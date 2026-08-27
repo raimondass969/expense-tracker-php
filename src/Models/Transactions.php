@@ -13,6 +13,10 @@ class Transactions
     public function addTransaction($transaction_type, $amount, $description, $categoryId)
     {
 
+        if (!in_array($transaction_type, ['INCOME', 'EXPENSE'])) {
+            throw new InvalidArgumentException('Galimos reiksmes INCOME arba EXPENSE ');
+        }
+
         try {
             $stmt = $this->pdo->prepare("INSERT INTO transactions(transaction_type,amount, description, category_id) VALUES (:transaction_type, :amount, :description, :category_id)");
             $stmt->execute([
