@@ -47,7 +47,15 @@ class Transactions
     {
 
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM transactions JOIN categories ON transactions.category_id = categories.id WHERE categories.user_id = :user_id");
+            $stmt = $this->pdo->prepare("SELECT
+                                        transactions.id AS transaction_id,
+                                        transactions.amount,
+                                        transactions.transaction_type,
+                                        transactions.DESCRIPTION,
+                                        categories.NAME
+                                     FROM transactions
+                                     JOIN categories ON transactions.category_id = categories.id
+                                     WHERE categories.user_id = :user_id");
             $stmt->execute([
                 'user_id' => $userId
             ]);

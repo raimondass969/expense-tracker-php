@@ -13,9 +13,10 @@ $transaction_type = $_POST['transaction_type'];
 $amount = $_POST['amount'];
 $description = $_POST['description'];
 $categoryId = $_POST['category_id'];
+$userId = $_SESSION['user_id'];
 
 $transaction = new Transactions($pdo);
-$transactionInfo = $transaction->addTransaction($transaction_type, $amount, $description, $categoryId);
+$transactionInfo = $transaction->addTransaction($transaction_type, $amount, $description, $categoryId, $userId);
 
 if (!isset($transactionInfo) || !$transactionInfo) {
     $_SESSION['error_message'] = 'Nepavyko prideti transakcijos!';

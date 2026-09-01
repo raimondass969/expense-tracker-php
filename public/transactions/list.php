@@ -19,5 +19,8 @@ foreach ($transactions as $transaction) {
     echo $transaction['transaction_type'];
     echo $transaction['amount'];
     echo $transaction['DESCRIPTION'];
-    echo "<a href='delete.php?id=$transaction[id]'>Istrinti</a>";
+    echo "<button onclick='transaction({$transaction['transaction_id']})'>Istrinti</button>";
 }
+?>
+
+<script src="transactions.js"></script>
