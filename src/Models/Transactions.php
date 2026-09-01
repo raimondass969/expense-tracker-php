@@ -10,7 +10,7 @@ class Transactions
         $this->pdo = $pdo;
     }
 
-    public function addTransaction($transaction_type, $amount, $description, $categoryId)
+    public function addTransaction($transaction_type, $amount, $description, $categoryId, $userId)
     {
 
         if (!in_array($transaction_type, ['INCOME', 'EXPENSE'])) {
@@ -18,19 +18,31 @@ class Transactions
         }
 
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO transactions(transaction_type,amount, description, category_id) VALUES (:transaction_type, :amount, :description, :category_id)");
+            $stmt = $this->pdo->prepare('SELECT id FROM Categories WHERE id= :category_id AND user_id= :user_id');
+
+            $stmt->execute([
+                'category_id' => $categoryId,
+                'user_id' => $userId
+            ]);
+
+            $category = $stmt->fetch();
+            if (!$category) {
+                return false;
+            }
+
+            $stmt = $this->pdo->prepare('INSERT INTO transactions(transaction_type,amount,description, category_id) VALUES (:transaction_type, :amount, :description, :categoryId)');
+
             $stmt->execute([
                 'transaction_type' => $transaction_type,
                 'amount' => $amount,
                 'description' => $description,
-                'category_id' => $categoryId,
+                'category_id' => $categoryId
             ]);
             return true;
         } catch (PDOException $e) {
             return false;
         }
     }
-
     public function getAllTransactions($userId)
     {
 
@@ -45,15 +57,24 @@ class Transactions
         }
     }
 
-    public function deleteTransaction($id)
+    public function deleteTransaction($id, $userId)
     {
 
         try {
-            $stmt = $this->pdo->prepare("DELETE FROM transactions WHERE id=:id");
+            $stmt = $this->pdo->prepare(
+                "DELETE transactions
+                FROM transactions
+                JOIN categories
+                    ON transactions.category_id = categories.id
+                WHERE transactions.id= :id
+                    AND categories.user_id = :user_id"
+
+            );
             $stmt->execute([
                 'id' => $id,
+                'user_id' => $userId,
             ]);
-            return true;
+            return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             return false;
         }

@@ -6,12 +6,13 @@ if (!isset($_SESSION['logged_in']) ||  $_SESSION['logged_in'] !== true) {
     exit();
 }
 $transactionId = $_GET['id'];
+$userId = $_SESSION['user_id'];
 
 $pdo = require_once '../../config/database.php';
 require_once '../../src/Models/Transactions.php';
 
 $transaction = new Transactions($pdo);
-$deleteTransaction = $transaction->deleteTransaction($transactionId);
+$deleteTransaction = $transaction->deleteTransaction($transactionId, $userId);
 
 if (!$deleteTransaction) {
     $_SESSION['error_message'] = 'Nepavyko istrinti transakcijos';

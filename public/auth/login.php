@@ -3,6 +3,13 @@ session_start();
 
 $pdo = require_once '../../config/database.php';
 require_once '../../src/Models/User.php';
+require_once '../../src/Services/Csrf.php';
+
+$token = $_POST['csrf_token'];
+
+if (!Csrf::validateToken($token)) {
+    exit('Invalid token');
+}
 
 $email = $_POST['email'];
 $password = $_POST['password'];
