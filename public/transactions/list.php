@@ -14,6 +14,10 @@ require_once '../../src/Models/Transactions.php';
 $transactionsList = new Transactions($pdo);
 $transactions = $transactionsList->getAllTransactions($userId);
 
+if (!$transactions) {
+    echo "Klaida gaunant transakcijas";
+    exit();
+}
 
 foreach ($transactions as $transaction) {
     echo $transaction['transaction_type'];
