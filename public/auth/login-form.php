@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once '../../src/Services/Csrf.php';
+$token = Csrf::generateToken();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +24,9 @@
             <label for="login_password">Iveskite slaptazodi</label>
             <input id="login_password" type="password" name="password">
         </div>
+        <input type="hidden" name="csrf_token" value="<?php echo $token ?>">
         <button>Prisijungti</button>
+
     </form>
 </body>
 

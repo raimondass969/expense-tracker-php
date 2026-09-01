@@ -1,0 +1,23 @@
+<?php
+
+class Csrf
+{
+    public static function generateToken()
+    {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $token;
+        return $token;
+    }
+
+    public static function validateToken($token)
+    {
+        if (!isset($_SESSION['csrf_token'])) {
+            return false;
+        }
+
+        if ($_SESSION['csrf_token'] !== $token) {
+            return false;
+        }
+        return true;
+    }
+}
