@@ -30,17 +30,17 @@ class Transactions
                 return false;
             }
 
-            $stmt = $this->pdo->prepare('INSERT INTO transactions(transaction_type,amount,description, category_id) VALUES (:transaction_type, :amount, :description, :categoryId)');
+            $stmt = $this->pdo->prepare('INSERT INTO transactions(transaction_type,amount,description, category_id) VALUES (:transaction_type, :amount, :description, :category_id)');
 
             $stmt->execute([
                 'transaction_type' => $transaction_type,
                 'amount' => $amount,
                 'description' => $description,
-                'category_id' => $categoryId
+                'category_id' => $categoryId,
             ]);
             return true;
         } catch (PDOException $e) {
-            return false;
+            return $e->getMessage();
         }
     }
     public function getAllTransactions($userId)
