@@ -26,4 +26,3 @@ if (!$confirmedUser) {
 $_SESSION['logged_in'] = true;
 $_SESSION['email'] = $email;
 $_SESSION['user_id'] = $confirmedUser['id'];
-print_r($_SESSION);
