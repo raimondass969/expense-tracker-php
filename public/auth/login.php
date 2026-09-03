@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: /auth/login-form.php');
+    exit();
+}
+
 $pdo = require_once '../../config/database.php';
 require_once '../../src/Models/User.php';
 require_once '../../src/Services/Csrf.php';
@@ -26,3 +31,6 @@ if (!$confirmedUser) {
 $_SESSION['logged_in'] = true;
 $_SESSION['email'] = $email;
 $_SESSION['user_id'] = $confirmedUser['id'];
+
+header('Location: /transactions/list.php');
+exit();
