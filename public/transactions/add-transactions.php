@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION['user_id'];
 
     $transaction = new Transactions($pdo);
-
     $transactionInfo = $transaction->addTransaction($transaction_type, $amount, $description, $categoryId, $userId);
 
     if (!isset($transactionInfo) || !$transactionInfo) {

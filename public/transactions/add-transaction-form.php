@@ -53,7 +53,7 @@ $userCategories = $category->getCategoriesForUser($_SESSION['user_id']);
                     <select name='category_id' id='category_id'>
                         <?php
                         foreach ($userCategories as $category) {
-                            echo "<option> {$category['NAME']}</option>";
+                            echo "<option value='{$category['id']}'>{$category['NAME']}</option>";
                         }
                         ?>
                     </select>
