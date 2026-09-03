@@ -5,6 +5,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: /auth/login-form.php');
     exit();
 }
+
+$pdo = require_once '../../config/database.php';
+require_once '../../src/Models/Category.php';
+
+$category = new Category($pdo);
+$userCategories = $category->getCategoriesForUser($_SESSION['user_id']);
 ?>
 
 
@@ -45,9 +51,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
                     <label for='category_id'>Pasirinkite kategorija: </label>
                     <select name='category_id' id='category_id'>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
+                        <?php
+                        foreach ($userCategories as $category) {
+                            echo "<option> {$category['NAME']}</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
