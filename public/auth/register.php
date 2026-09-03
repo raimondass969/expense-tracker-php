@@ -9,6 +9,7 @@ $username = $_POST['register_username'];
 $password = $_POST['register_password'];
 $confirm_password = $_POST['confirm_register_password'];
 
+
 $user = new User($pdo);
 
 
@@ -36,14 +37,9 @@ if (strlen($password) < 8) {
 $newUser = $user->userRegister($email, $username, $password);
 
 if ($newUser) {
-
-    $_SESSION['logged_in'] = true;
-    $_SESSION['email'] = $email;
-    $_SESSION['username'] = $username;
-
-    echo 'Registracija sekminga!' . $username;
-    return true;
+    header('Location: /auth/login-form.php');
+    exit();
 } else {
     echo 'Registracija nesekmniga!';
-    return false;
+    exit();
 }

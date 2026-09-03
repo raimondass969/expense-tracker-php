@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!isset($transactionInfo) || !$transactionInfo) {
         $_SESSION['error_message'] = 'Nepavyko prideti transakcijos!';
-        header('Location: add-transactions.php');
+        header('Location: add-transaction-form.php');
     } else {
         $_SESSION['success_message'] = 'Transakcija sekmingai prideta!';
-        header('Location: ../../index.php');
+        header('Location: /transactions/list.php');
     }
 }

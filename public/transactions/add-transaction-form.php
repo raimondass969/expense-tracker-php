@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: /auth/login-form.php');
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,9 +15,9 @@
     <title>Create new transaction</title>
 </head>
 
-<?php if (isset($_SESSION['success_message'])) : ?>
-    <p><?= $_SESSION['success_message'] ?></p>
-    <?php unset($_SESSION['success_message']); ?>
+<?php if (isset($_SESSION['error_message'])) : ?>
+    <p><?= $_SESSION['error_message'] ?></p>
+    <?php unset($_SESSION['error_message']); ?>
 <?php endif; ?>
 
 <body>

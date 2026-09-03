@@ -14,8 +14,13 @@ require_once '../../src/Models/Transactions.php';
 $transactionsList = new Transactions($pdo);
 $transactions = $transactionsList->getAllTransactions($userId);
 
-if (!$transactions) {
+if ($transactions === false) {
     echo "Klaida gaunant transakcijas";
+    exit();
+}
+
+if (empty($transactions)) {
+    echo 'Transakciju kol kas nera.';
     exit();
 }
 
@@ -24,7 +29,7 @@ foreach ($transactions as $transaction) {
     echo $transaction['transaction_type'];
     echo $transaction['amount'];
     echo $transaction['DESCRIPTION'];
-    echo "<button onclick='transaction({$transaction['transaction_id']})'>Istrinti</button>";
+    echo "<button onclick='deleteTransaction({$transaction['transaction_id']})'>Istrinti</button>";
     echo "</div>";
 }
 ?>
