@@ -8,12 +8,20 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 $pdo = require_once '../../config/database.php';
 require_once '../../src/Models/Transactions.php';
+require_once '../../src/Services/Csrf.php';
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $transaction_type = $_POST['transaction_type'];
     $amount = $_POST['amount'];
     $description = $_POST['description'];
     $categoryId = $_POST['category_id'];
     $userId = $_SESSION['user_id'];
+    $token = $_POST['csrf_token'];
+
+    if (!Csrf::validateToken($token)) {
+        exit('Invalid CSRF token');
+    }
 
     $transaction = new Transactions($pdo);
     $transactionInfo = $transaction->addTransaction($transaction_type, $amount, $description, $categoryId, $userId);

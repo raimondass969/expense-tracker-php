@@ -8,6 +8,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 $pdo = require_once '../../config/database.php';
 require_once '../../src/Models/Category.php';
+require_once '../../src/Services/Csrf.php';
+
+$token = Csrf::generateToken();
 
 $category = new Category($pdo);
 $userCategories = $category->getCategoriesForUser($_SESSION['user_id']);
@@ -28,6 +31,7 @@ $userCategories = $category->getCategoriesForUser($_SESSION['user_id']);
 
 <body>
     <form method="POST" action="add-transactions.php">
+        <input type="hidden" name="csrf_token" value="<?php echo $token ?>">
         <div class="transactionForm">
             <div class="transaction_type">
                 <label for='transaction_type'>Transakcijos tipas: </label>
