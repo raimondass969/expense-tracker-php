@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require_once '../../src/Services/Csrf.php';
+$token = Csrf::generateToken();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +15,7 @@
 
 <body>
     <form method="POST" action="register.php">
+        <input type="hidden" name="csrf_token" value="<?php echo $token ?>">
         <div class="registerForm">
             <div class="registerUsername">
                 <label for="register_username">Iveskite savo varda</label>

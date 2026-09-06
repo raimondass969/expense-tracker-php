@@ -4,6 +4,10 @@ class Csrf
 {
     public static function generateToken()
     {
+
+        if (isset($_SESSION['csrf_token'])) {
+            return $_SESSION['csrf_token'];
+        }
         $token = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $token;
         return $token;

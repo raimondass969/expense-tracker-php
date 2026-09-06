@@ -3,6 +3,7 @@ session_start();
 require_once '../../src/Services/Csrf.php';
 $token = Csrf::generateToken();
 
+
 ?>
 
 <!DOCTYPE html>
