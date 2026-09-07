@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <title>SpendOops</title>
 </head>
 
 <body>
