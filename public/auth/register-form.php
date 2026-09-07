@@ -31,13 +31,10 @@ $token = Csrf::generateToken();
                     src="../assets/images/spendoops-mark.svg"
                     alt=""
                     class="h-9 w-9">
-                <span class="text-2xl font-semibold tracking-tight">Spend
-                    <span class="text-violet-500">Oops
-                    </span>
-                </span>
+                <span class="text-2xl font-semibold tracking-tight">Spend<span class="text-violet-500">Oops</span></span>
             </div>
             <div class="space-y-4">
-                <h1 class="text-5xl font-extrabold leading-tight">Take control of your
+                <h1 class="text-6xl font-extrabold leading-tight">Take control of your
                     <span class="text-violet-500">money.</span>
                 </h1>
                 <p class="text-lg text-gray-600 max-w-md">Track your income and expense in one simple place.</p>
@@ -102,6 +99,7 @@ $token = Csrf::generateToken();
                             type="email">
                     </div>
                 </div>
+
                 <!-- Register password input -->
                 <div class="flex flex-col mb-4">
                     <label for="register_password">Iveskite savo slaptazodi</label>
@@ -145,6 +143,12 @@ $token = Csrf::generateToken();
                     class="rounded-2xl border border-black bg-violet-300 p-2 mt-6 w-full"
                     type="submit">Registracija
                 </button>
+                <div class="flex justify-center gap-1 mt-6">
+                    <p class="text-gray-600">Jau turite paskyrą?</p>
+
+                    <a href="login-form.php"
+                        class="text-violet-600 font-semibold hover:underline">Prisijunkite</a>
+                </div>
 
             </form>
 
