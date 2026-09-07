@@ -28,7 +28,7 @@ foreach ($transactions as $transaction) {
     echo "<div id='transaction-{$transaction['transaction_id']}'>";
     echo $transaction['transaction_type'];
     echo $transaction['amount'];
-    echo $transaction['DESCRIPTION'];
+    echo htmlspecialchars($transaction['DESCRIPTION']);
     echo "<button onclick='deleteTransaction({$transaction['transaction_id']})'>Istrinti</button>";
     echo "</div>";
 }
