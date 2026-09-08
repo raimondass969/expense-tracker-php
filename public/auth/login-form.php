@@ -37,7 +37,7 @@ $token = Csrf::generateToken();
                 <h1 class="text-6xl font-extrabold leading-tight">Take control of your
                     <span class="text-violet-500">money.</span>
                 </h1>
-                <p class="text-lg text-gray-600 max-w-md">Track your income and expense in one simple place.</p>
+                <p class="text-lg text-gray-600 max-w-md">Track your income and expenses in one simple place.</p>
             </div>
         </section>
 
@@ -57,7 +57,7 @@ $token = Csrf::generateToken();
 
                 <!-- login email input -->
                 <div class="flex flex-col mb-4">
-                    <label for="login_email">El pastas</label>
+                    <label for="login_email">El. paštas</label>
                     <div class="relative ">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24"
@@ -71,13 +71,13 @@ $token = Csrf::generateToken();
                             id='login_email'
                             type="email"
                             name='email'
-                            placeholder="Jusu el. pastas">
+                            placeholder="Jūsų el. paštas">
                     </div>
                 </div>
 
                 <!-- login pass input -->
                 <div class="flex flex-col mb-4">
-                    <label for="login_password">Iveskite slaptazodi</label>
+                    <label for="login_password">Įveskite slaptažodį</label>
 
                     <div class="relative">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -90,6 +90,7 @@ $token = Csrf::generateToken();
                         <input
                             class="border rounded-lg w-full font-light py-2 pl-10"
                             id="login_password"
+                            placeholder="Jūsų slaptažodis"
                             type="password"
                             name="password">
 

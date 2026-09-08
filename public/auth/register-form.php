@@ -10,7 +10,7 @@ $token = Csrf::generateToken();
 <html lang="lt">
 
 <head>
-    <title>Register page</title>
+    <title>Registracija | SpendOops</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@ $token = Csrf::generateToken();
                 <h1 class="text-6xl font-extrabold leading-tight">Take control of your
                     <span class="text-violet-500">money.</span>
                 </h1>
-                <p class="text-lg text-gray-600 max-w-md">Track your income and expense in one simple place.</p>
+                <p class="text-lg text-gray-600 max-w-md">Track your income and expenses in one simple place.</p>
             </div>
         </section>
 
@@ -60,7 +60,7 @@ $token = Csrf::generateToken();
 
                 <!-- Register username input -->
                 <div class="flex flex-col mb-4">
-                    <label for="register_username">Iveskite savo varda</label>
+                    <label for="register_username">Įveskite savo vardą</label>
                     <div class="relative">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -72,7 +72,7 @@ $token = Csrf::generateToken();
 
                         <input
                             class="border rounded-lg w-full font-light py-2 pl-10"
-                            placeholder="Jusu vardas"
+                            placeholder="Jūsų vardas"
                             id="register_username"
                             name="register_username"
                             type="text">
@@ -81,7 +81,7 @@ $token = Csrf::generateToken();
 
                 <!-- Register email input -->
                 <div class="flex flex-col mb-4">
-                    <label for='register_email'> Iveskite savo el pasta</label>
+                    <label for='register_email'>Įveskite savo el. paštą</label>
                     <div class="relative">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24"
@@ -93,7 +93,7 @@ $token = Csrf::generateToken();
 
                         <input
                             class="border rounded-lg w-full font-light py-2 pl-10"
-                            placeholder="Jusu el. pastas"
+                            placeholder="Jūsų el. paštas"
                             id="register_email"
                             name="register_email"
                             type="email">
@@ -102,7 +102,7 @@ $token = Csrf::generateToken();
 
                 <!-- Register password input -->
                 <div class="flex flex-col mb-4">
-                    <label for="register_password">Iveskite savo slaptazodi</label>
+                    <label for="register_password">Įveskite savo slaptažodį</label>
                     <div class="relative">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -112,7 +112,7 @@ $token = Csrf::generateToken();
                         </svg>
                         <input
                             class="border rounded-lg w-full font-light py-2 pl-10"
-                            placeholder="Jusu slaptazodis"
+                            placeholder="Jūsų slaptažodis"
                             id="register_password"
                             name="register_password"
                             type="password">
@@ -120,7 +120,7 @@ $token = Csrf::generateToken();
                 </div>
                 <!-- Register confirm_password input -->
                 <div class="flex flex-col mb-4">
-                    <label for="confirm_register_password">Pakartokite savo slaptazodi</label>
+                    <label for="confirm_register_password">Pakartokite savo slaptažodį</label>
                     <div class="relative">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -133,7 +133,7 @@ $token = Csrf::generateToken();
                         <input
                             class="border rounded-lg w-full font-light py-2 pl-10"
                             id="confirm_register_password"
-                            placeholder="Pakartokite jusu slaptazodi"
+                            placeholder="Pakartokite savo slaptažodį"
                             name="confirm_register_password"
                             type="password">
                     </div>
