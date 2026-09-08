@@ -1,16 +1,24 @@
-# Expense tracker
+<p align="center">
+  <img src="public/assets/images/spendoops-logo.svg" alt="SpendOops logo" width="260">
+</p>
 
-Personal expense tracker built with vanilla PHP, MySQL and PDO.
+# SpendOops
+
+SpendOops is a personal finance tracker built with vanilla PHP, MySQL and PDO.
+
+## Screenshot
+
+![SpendOops login](docs/screenshots/login.png)
 
 ## Features
 
 - User registration and login
 - Secure password hashing with `password_hash()` and `password_verify()`
 - User-specific income and expense tracking
-- Transaction categories
+- User-specific transaction categories
 - Add, view and delete transactions
 - CSRF protection
-- AJAX transaction deletion without page reload
+- Responsive UI built with Tailwind CSS
 - PDO prepared statements for database queries
 
 ## Tech Stack
@@ -20,7 +28,7 @@ Personal expense tracker built with vanilla PHP, MySQL and PDO.
 - PDO
 - JavaScript
 - HTML
-- CSS
+- Tailwind CSS
 
 ## Database Schema
 
@@ -32,7 +40,7 @@ The application uses a database with three main tables:
 - `categories`
 - `transactions`
 
-## Users
+### Users
 
 The `Users` table stores information about registered users.
 
@@ -46,39 +54,72 @@ The `Categories` table stores transaction categories, such as:
 - Transport
 - Entertainment
 - Bills
+
   Categories are used to organize transactions and make expenses easier to track.
 
-## Transactions
+### Transactions
 
 The `Transactions` table stores user's financial transactions.
 
-Each transaction is linked to a user indirectly through the category it belongs to. A transaction contains information such as the amount, description, and date.
+Each transaction contains information such as:
+
+- transaction type
+- amount
+- description
+- category
+
+Transactions are associated with a user through their category.
 
 ## Table Relationships
 
-- One `User` can have many `transactions`.
-- One `category` can be assigned to many `transactions`.
-- Each `transaction` is indirectly associated with one `user` through its `category`.
-- Each `transaction` belongs to one `category`.
+- One `user` can have many `categories`.
+- One `category` belongs to one `user`.
+- One `category` can have many `transactions`.
+- One `transaction` belongs to one `category`.
+- A `transaction` is associated with a `user` through its `category`.
 
 This structure allows each user to track and categorize their expenses independently.
 
 ## Setup
 
 1. Clone this repository
-2. Create a MySQL database
-3. Import `database/schema.sql` into your database
-4. Copy the database configuration example:
+2. Install PHP dependencies if required:
+3. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+4. Create a MySQL database.
+5. Import:
+
+```bash
+database/schema.sql
+```
+
+6. Copy the database configuration example:
 
 ```bash
 cp config/database.example.php config/database.php
 ```
 
-5. Open config/database.php and update the database credentials if needed
-6. Start the PHP development server:
+7. Update the database credentials in:
+
+```bash
+config/database.php
+```
+
+8. Build Tailwind CSS:
+
+```bash
+npx @tailwindcss/cli -i ./src/css/input.css -o ./public/css/output.css
+```
+
+9. Start the PHP development server:
 
 ```bash
 php -S localhost:8000 -t public
 ```
 
-7. Open the application in your browser
+10. Open the application in your browser:
+    http://localhost:8000
