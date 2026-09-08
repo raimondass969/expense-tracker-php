@@ -13,3 +13,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# NPM
+/node_modules/
+
+# CSS 
+/public/css/output.css
