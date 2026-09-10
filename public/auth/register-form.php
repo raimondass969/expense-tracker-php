@@ -1,9 +1,12 @@
 <?php
+
+use App\Services\Csrf;
+
 session_start();
 
-require_once '../../src/Services/Csrf.php';
-$token = Csrf::generateToken();
+require_once  __DIR__ . '/../../vendor/autoload.php';
 
+$token = Csrf::generateToken();
 ?>
 
 <!DOCTYPE html>

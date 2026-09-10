@@ -1,14 +1,18 @@
 <?php
+
+use App\Services\Csrf;
+use App\Models\User;
+
 session_start();
+
+require_once  __DIR__ . '/../../vendor/autoload.php';
+
+$pdo = require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: /auth/login-form.php');
     exit();
 }
-
-$pdo = require_once '../../config/database.php';
-require_once '../../src/Models/User.php';
-require_once '../../src/Services/Csrf.php';
 
 $token = $_POST['csrf_token'];
 
