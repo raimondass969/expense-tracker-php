@@ -3,11 +3,7 @@
 use App\Services\Csrf;
 use App\Models\User;
 
-session_start();
-
-require_once  __DIR__ . '/../../vendor/autoload.php';
-
-$pdo = require_once __DIR__ . '/../../config/database.php';
+$pdo = require_once __DIR__ . '/../../bootstrap.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: /auth/login-form.php');

@@ -3,11 +3,7 @@
 use App\Models\Transactions;
 use App\Services\Csrf;
 
-session_start();
-
-require_once  __DIR__ . '/../../vendor/autoload.php';
-
-$pdo = require_once __DIR__ . '/../../config/database.php';
+$pdo = require_once __DIR__ . '/../../bootstrap.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../auth/login-form.php');
