@@ -1,6 +1,6 @@
 <?php
 
-require_once '../src/Exceptions/DatabaseConnectionException.php';
+use App\Exceptions\DatabaseConnectionException;
 
 $username = '';
 $password = '';
