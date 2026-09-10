@@ -1,10 +1,8 @@
 <?php
 
-use App\Exceptions\NewCategoryException;
-use App\Models\Category;
 use App\Models\User;
 use App\Services\Csrf;
-use App\Exceptions\RegisterNewUserException;
+use App\Controllers\RegisterController;
 
 $pdo = require_once __DIR__ . '/../../bootstrap.php';
 
@@ -41,37 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    try {
-        $pdo->beginTransaction();
-        $newUserId = $user->userRegister($email, $username, $password);
-
-        if (!$newUserId) {
-            throw new RegisterNewUserException('Registracija nesėkminga');
-        }
-
-        $defaultCategories = [
-            'Food',
-            'Transport',
-            'Other'
-        ];
-
-        $newCategory = new Category($pdo);
-        // Create default categories for new users
-        foreach ($defaultCategories as $category) {
-            $createdCategory = $newCategory->addCategory($newUserId, $category);
-
-            if (!$createdCategory) {
-                throw new NewCategoryException('Nepavyko sukurti kategorijos');
-            }
-        }
-        $pdo->commit();
-    } catch (Throwable $e) {
-        $pdo->rollBack();
-
-        echo 'Registracija nepavyko';
+    $registerController = new RegisterController($pdo);
+    $registered = $registerController->register($email, $username, $password);
+    if (!$registered) {
+        echo 'Registracija nepavyko.';
         exit();
     }
-
     header('Location: /auth/login-form.php');
     exit();
 }
