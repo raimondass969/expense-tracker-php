@@ -2,11 +2,7 @@
 
 use App\Models\Transactions;
 
-session_start();
-
-require_once  __DIR__ . '/../../vendor/autoload.php';
-
-$pdo = require_once __DIR__ . '/../../config/database.php';
+$pdo = require_once __DIR__ . '/../../bootstrap.php';
 
 header('Content-type: application/json');
 if (!isset($_SESSION['logged_in']) ||  $_SESSION['logged_in'] !== true) {

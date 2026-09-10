@@ -3,11 +3,7 @@
 use App\Models\User;
 use App\Services\Csrf;
 
-session_start();
-
-require_once  __DIR__ . '/../../vendor/autoload.php';
-
-$pdo = require_once __DIR__ . '/../../config/database.php';
+$pdo = require_once __DIR__ . '/../../bootstrap.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['register_email'];
