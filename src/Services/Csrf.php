@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 class Csrf
 {
     public static function generateToken()

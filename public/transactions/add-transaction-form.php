@@ -1,21 +1,24 @@
 <?php
+
+use App\Services\Csrf;
+use App\Models\Category;
+
 session_start();
+
+require_once  __DIR__ . '/../../vendor/autoload.php';
+
+$pdo = require_once __DIR__ . '/../../config/database.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: /auth/login-form.php');
     exit();
 }
 
-$pdo = require_once '../../config/database.php';
-require_once '../../src/Models/Category.php';
-require_once '../../src/Services/Csrf.php';
-
 $token = Csrf::generateToken();
 
 $category = new Category($pdo);
 $userCategories = $category->getCategoriesForUser($_SESSION['user_id']);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="lt">

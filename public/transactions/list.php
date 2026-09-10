@@ -1,14 +1,19 @@
 <?php
+
+use App\Models\Transactions;
+
 session_start();
+
+require_once  __DIR__ . '/../../vendor/autoload.php';
+
+$pdo = require_once __DIR__ . '/../../config/database.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../auth/login-form.php');
     exit();
 }
-$userId = $_SESSION['user_id'];
 
-$pdo = require_once '../../config/database.php';
-require_once '../../src/Models/Transactions.php';
+$userId = $_SESSION['user_id'];
 
 $transactionsList = new Transactions($pdo);
 $transactions = $transactionsList->getAllTransactions($userId);

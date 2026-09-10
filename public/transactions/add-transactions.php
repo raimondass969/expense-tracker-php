@@ -1,15 +1,18 @@
 <?php
+
+use App\Models\Transactions;
+use App\Services\Csrf;
+
 session_start();
+
+require_once  __DIR__ . '/../../vendor/autoload.php';
+
+$pdo = require_once __DIR__ . '/../../config/database.php';
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: ../auth/login-form.php');
     exit();
 }
-
-$pdo = require_once '../../config/database.php';
-require_once '../../src/Models/Transactions.php';
-require_once '../../src/Services/Csrf.php';
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $transaction_type = $_POST['transaction_type'];
@@ -29,8 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($transactionInfo) || !$transactionInfo) {
         $_SESSION['error_message'] = 'Nepavyko prideti transakcijos!';
         header('Location: add-transaction-form.php');
+        exit();
     } else {
         $_SESSION['success_message'] = 'Transakcija sekmingai prideta!';
         header('Location: /transactions/list.php');
+        exit();
     }
 }

@@ -1,10 +1,13 @@
 <?php
+
+use App\Models\User;
+use App\Services\Csrf;
+
 session_start();
 
-$pdo = require_once '../../config/database.php';
-require_once '../../src/Models/User.php';
-require_once '../../src/Services/Csrf.php';
+require_once  __DIR__ . '/../../vendor/autoload.php';
 
+$pdo = require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['register_email'];
@@ -18,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $user = new User($pdo);
-
-
 
     if (!$email || !$username || !$password || !$confirm_password) {
         echo 'Visi laukai privalomi';
