@@ -26,7 +26,7 @@ class User
                 'username' => $username,
                 'hash_password' => $hash_password
             ]);
-            return true;
+            return $this->pdo->lastInsertId();
         } catch (PDOException $e) {
             return false;
         }
